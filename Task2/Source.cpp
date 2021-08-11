@@ -19,10 +19,20 @@ long long factorial(int n) {
 	return res;
 }
 void input(int& n) {
-	do {
+	while (true) {
 		cout << "Please enter a positive integer: ";
 		cin >> n;
-	} while (n <= 0);
+		if (cin.good())
+		{
+			break;
+		}
+		else
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Invalid input; please re-enter." << endl;
+		}
+	}
 }
 int main() {
 	int n;
