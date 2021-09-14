@@ -21,18 +21,24 @@ GSCredit::~GSCredit()
 void GSCredit::Init()
 {
 	auto model = ResourceManagers::GetInstance()->GetModel("Sprite2D.nfg");
-	auto texture = ResourceManagers::GetInstance()->GetTexture("m_menu_background.tga");
+	auto texture = ResourceManagers::GetInstance()->GetTexture("m_background_01_static.tga");
 	auto shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
 	// background	
 	m_background = std::make_shared<Sprite2D>(model, shader, texture);
 	m_background->Set2DPosition((float)Globals::screenWidth / 2, (float)Globals::screenHeight / 2);
-	m_background->SetSize(500, 1000);
+	m_background->SetSize(1332, 999);
+
+	// window
+	texture = ResourceManagers::GetInstance()->GetTexture("m_credit_window.tga");
+	m_credit_window = std::make_shared<Sprite2D>(model, shader, texture);
+	m_credit_window->Set2DPosition((float)Globals::screenWidth / 2, (float)Globals::screenHeight / 2);
+	m_credit_window->SetSize(1000, 868);
 
 	// button clode
-	texture = ResourceManagers::GetInstance()->GetTexture("btn_close.tga");
+	texture = ResourceManagers::GetInstance()->GetTexture("m_exit_button.tga");
 	std::shared_ptr<GameButton>  button = std::make_shared<GameButton>(model, shader, texture);
 	button->Set2DPosition(Globals::screenWidth - 50, 50);
-	button->SetSize(50, 50);
+	button->SetSize(75, 75);
 	button->SetOnClick([]() {
 		GameStateMachine::GetInstance()->PopState();
 		});
@@ -40,32 +46,30 @@ void GSCredit::Init()
 
 	// credit
 	shader = ResourceManagers::GetInstance()->GetShader("TextShader");
-	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("Pixel.otf");
-	m_header = std::make_shared< Text>(shader, font, "xxxxxxxxCREDITxxxxxxxx", Vector4(245 / 255.0f, 174 / 255.0f, 71 / 255.0f, 255 / 255.0f), 1.5);
-	m_header->Set2DPosition(Vector2(20, 200));
+	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("neuropol.ttf");
 
-	std::shared_ptr<Text> credit = std::make_shared< Text>(shader, font, "GAME DESIGNER : ", Vector4(245 / 255.0f, 174 / 255.0f, 71 / 255.0f, 255 / 255.0f), 1.2f);
-	credit->Set2DPosition(Vector2(50, 300));
+	std::shared_ptr<Text> credit = std::make_shared< Text>(shader, font, "GAME DESIGNER : ", Vector4(1, 1,1, 1), 1.5f);
+	credit->Set2DPosition(Vector2(400, 350));
 	m_credit.push_back(credit);
 
-	credit = std::make_shared< Text>(shader, font, "Pham Hoang Thinh ", Vector4(245 / 255.0f, 174 / 255.0f, 71 / 255.0f, 255 / 255.0f), 1);
-	credit->Set2DPosition(Vector2(50, 350));
+	credit = std::make_shared< Text>(shader, font, "Pham Hoang Thinh ", Vector4(1, 1, 1, 1), 1.2f);
+	credit->Set2DPosition(Vector2(400, 400));
 	m_credit.push_back(credit);
 
-	credit = std::make_shared< Text>(shader, font, "GAME PROGRAMMER :  ", Vector4(245 / 255.0f, 174 / 255.0f, 71 / 255.0f, 255 / 255.0f), 1.2f);
-	credit->Set2DPosition(Vector2(50, 400));
+	credit = std::make_shared< Text>(shader, font, "GAME PROGRAMMER :  ", Vector4(1, 1, 1, 1), 1.5f);
+	credit->Set2DPosition(Vector2(400, 500));
 	m_credit.push_back(credit);
 
-	credit = std::make_shared< Text>(shader, font, "Pham Hoang Thinh ", Vector4(245 / 255.0f, 174 / 255.0f, 71 / 255.0f, 255 / 255.0f), 1);
-	credit->Set2DPosition(Vector2(50, 450));
+	credit = std::make_shared< Text>(shader, font, "Pham Hoang Thinh ", Vector4(1, 1, 1, 1), 1.2f);
+	credit->Set2DPosition(Vector2(400, 550));
 	m_credit.push_back(credit);
 
-	credit = std::make_shared< Text>(shader, font, "SPECICAL THANK TO : ", Vector4(245 / 255.0f, 174 / 255.0f, 71 / 255.0f, 255 / 255.0f), 1.2f);
-	credit->Set2DPosition(Vector2(50, 500));
+	credit = std::make_shared< Text>(shader, font, "SPECICAL THANK TO : ", Vector4(1, 1, 1, 1), 1.5f);
+	credit->Set2DPosition(Vector2(400, 650));
 	m_credit.push_back(credit);
 
-	credit = std::make_shared< Text>(shader, font, "itcho.io for the art ", Vector4(245 / 255.0f, 174 / 255.0f, 71 / 255.0f, 255 / 255.0f), 1);
-	credit->Set2DPosition(Vector2(50, 550));
+	credit = std::make_shared< Text>(shader, font, "itcho.io for the art ", Vector4(1, 1, 1, 1), 1.2f);
+	credit->Set2DPosition(Vector2(400, 700));
 	m_credit.push_back(credit);
 }
 
@@ -115,7 +119,7 @@ void GSCredit::Update(float deltaTime)
 void GSCredit::Draw()
 {
 	m_background->Draw();
-	m_header->Draw();
+	m_credit_window->Draw();
 	for (auto it : m_listButton)
 	{
 		it->Draw();

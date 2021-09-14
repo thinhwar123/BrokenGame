@@ -28,5 +28,6 @@ public:
 
 protected:
 	StateType m_stateType;
+	int m_keyPressed;
 };
 

@@ -3,8 +3,8 @@
 #include "Application.h"
 #include "utilities.h" 
 
-int Globals::screenWidth = 480;
-int Globals::screenHeight = 800;
+int Globals::screenWidth = 1332;
+int Globals::screenHeight = 999;
 
 GLint Init(ESContext* esContext)
 {
@@ -48,7 +48,7 @@ GLint _tmain(GLint argc, _TCHAR* argv[])
 {
 	ESContext esContext;
 	esInitContext(&esContext);
-	esCreateWindow(&esContext, "Epic Game", Globals::screenWidth, Globals::screenHeight, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
+	esCreateWindow(&esContext, "Broken Game", Globals::screenWidth, Globals::screenHeight, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
 	if (Init(&esContext) != 0)
 		return 0;
 
